@@ -63,7 +63,6 @@ python test.py \
   --device "cuda:0" \
   --dataset "MIMIC3" \
   --dataset_path "/home/sde1/tys/data/mimiciii" \
-  --seed 78388758 \
   --dev False \
   --refresh_cache False
 ```
