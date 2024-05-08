@@ -67,6 +67,7 @@ python test.py \
   --refresh_cache False
 ```
 
+For more coding details, please refer to the PyHealth source code: https://github.com/sunlabuiuc/PyHealth
 ## Reference
 
 todo
