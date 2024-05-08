@@ -27,7 +27,7 @@ To set up the environment using conda, follow these steps:
 
 ## Usage
 
-You can run and test your own model using the following code:
+You can run and test your own model using the following code, and remember to complete your local dataset path:
 
 ```
 python run.py \
@@ -42,7 +42,7 @@ python run.py \
   --batch_size 256 \
   --device "cuda:0" \
   --dataset "MIMIC3" \
-  --dataset_path "/home/sde1/tys/data/mimiciii" \
+  --dataset_path "your dataset path" \
   --dev False \
   --refresh_cache False 
 ```
@@ -62,7 +62,7 @@ python test.py \
   --batch_size 256 \
   --device "cuda:0" \
   --dataset "MIMIC3" \
-  --dataset_path "/home/sde1/tys/data/mimiciii" \
+  --dataset_path "your dataset path" \
   --dev False \
   --refresh_cache False
 ```

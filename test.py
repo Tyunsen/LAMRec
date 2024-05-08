@@ -25,7 +25,7 @@ if __name__ == "__main__":
 
     parser.add_argument('--device', type=str, default="cuda:0",help='The device to run the model on, e.g., "cuda:0" for GPU')
     parser.add_argument('--dataset', type=str, default="MIMIC3", help='The name of the dataset to use')
-    parser.add_argument('--dataset_path', type=str, default="/home/sde1/tys/data/mimiciii",help='The dataset file path, which should contain the main csv files')
+    parser.add_argument('--dataset_path', type=str, help='The dataset file path, which should contain the main csv files')
     parser.add_argument('--dev', type=bool, default=False, help='Whether to run the model in development mode')
     parser.add_argument('--refresh_cache', type=bool, default=False, help='Whether to refresh the cached dataset files')
 
