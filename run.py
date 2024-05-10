@@ -34,7 +34,8 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    set_seed(generate_random_seed())
+    seed = generate_random_seed()
+    set_seed(seed)
 
     # STEP 1: load data
     base_dataset = MIMIC3Dataset(
@@ -69,7 +70,7 @@ if __name__ == "__main__":
         model=model,
         metrics=["jaccard_samples", "pr_auc_samples", "f1_samples", "ddi_score", "roc_auc_samples", "avg_med"],
         device=args.device,
-        seed=args.seed
+        seed=seed
     )
 
     # train & test
