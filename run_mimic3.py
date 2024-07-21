@@ -1,5 +1,6 @@
 import sys
 sys.path.append('..')
+from util import generate_random_seed
 from models.model import LAMRec
 import argparse
 from pyhealth.utils import set_seed
@@ -11,7 +12,7 @@ from trainer import Trainer
 if __name__ == "__main__":
 
     # create ArgumentParser instance
-    parser = argparse.ArgumentParser(description='LAMRec:Label-aware Multi-view Drug Recommendation')
+    parser = argparse.ArgumentParser(description='LAMRec: Label-aware Multi-view Drug Recommendation')
 
     parser.add_argument('--embedding_dim', type=int, default=512, help='The dimensionality of the embedding space')
     parser.add_argument('--heads', type=int, default=8,help='The number of attention heads in the cross-attention module')
@@ -23,14 +24,14 @@ if __name__ == "__main__":
     parser.add_argument('--epochs', type=int, default=50, help='The number of training epochs')
     parser.add_argument('--batch_size', type=int, default=256, help='The batch size for training')
 
-    parser.add_argument('--device', type=str, default="cuda:0",help='The device to run the model on, e.g., "cuda:0" for GPU')
+    parser.add_argument('--device', type=str, default="cuda:6",help='The device to run the model on, e.g., "cuda:0" for GPU')
     parser.add_argument('--dataset_path', type=str, default="/home/lnsdu/tys/data/mimiciii", help='The dataset file path, which should contain the main csv files')
     parser.add_argument('--dev', type=bool, default=False, help='Whether to run the model in development mode')
     parser.add_argument('--refresh_cache', type=bool, default=False, help='Whether to refresh the cached dataset files')
 
     args = parser.parse_args()
 
-    seed = 78388758
+    seed = generate_random_seed()
     set_seed(seed)
 
     # STEP 1: load data
@@ -69,4 +70,12 @@ if __name__ == "__main__":
         seed=seed
     )
 
-    trainer.test(test_dataloader)
+    # train & test
+    trainer.train(
+        train_dataloader=train_dataloader,
+        val_dataloader=val_dataloader,
+        test_dataloader=test_dataloader,
+        epochs=args.epochs,
+        monitor="jaccard_samples",
+        lr=args.lr,
+    )

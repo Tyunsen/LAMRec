@@ -1,8 +1,6 @@
 import sys
-
-from util import generate_random_seed
-
 sys.path.append('..')
+from util import generate_random_seed
 from models.model import LAMRec
 import argparse
 from pyhealth.utils import set_seed
@@ -14,21 +12,20 @@ from trainer import Trainer
 if __name__ == "__main__":
 
     # create ArgumentParser instance
-    parser = argparse.ArgumentParser(description='LAMRec:Label-aware Multi-view Drug Recommendation')
+    parser = argparse.ArgumentParser(description='LAMRec: Label-aware Multi-view Drug Recommendation')
 
     parser.add_argument('--embedding_dim', type=int, default=512, help='The dimensionality of the embedding space')
-    parser.add_argument('--heads', type=int, default=8,help='The number of attention heads in the cross-attention module')
+    parser.add_argument('--heads', type=int, default=2,help='The number of attention heads in the cross-attention module')
     parser.add_argument('--num_layers', type=int, default=2, help='The number of cross-attention blocks')
     parser.add_argument('--alpha', type=float, default=1e-1, help='The balancing factor for the DDI loss')
     parser.add_argument('--beta', type=float, default=1e-1,help='The balancing factor for the multi-view contrastive loss')
-    parser.add_argument('--temperature', type=float, default=8,help='The balancing factor mentioned in the Eq.(13)')
-    parser.add_argument('--lr', type=float, default=5e-4, help='Learning rate')
+    parser.add_argument('--temperature', type=float, default=10,help='The balancing factor mentioned in the Eq.(13)')
+    parser.add_argument('--lr', type=float, default=3e-4, help='Learning rate')
     parser.add_argument('--epochs', type=int, default=50, help='The number of training epochs')
     parser.add_argument('--batch_size', type=int, default=256, help='The batch size for training')
 
-    parser.add_argument('--device', type=str, default="cuda:0",help='The device to run the model on, e.g., "cuda:0" for GPU')
-    parser.add_argument('--dataset', type=str, default="MIMIC3", help='The name of the dataset to use')
-    parser.add_argument('--dataset_path', type=str, help='The dataset file path, which should contain the main csv files')
+    parser.add_argument('--device', type=str, default="cuda:6",help='The device to run the model on, e.g., "cuda:0" for GPU')
+    parser.add_argument('--dataset_path', type=str, default="/home/lnsdu/tys/data/mimicii", help='The dataset file path, which should contain the main csv files')
     parser.add_argument('--dev', type=bool, default=False, help='Whether to run the model in development mode')
     parser.add_argument('--refresh_cache', type=bool, default=False, help='Whether to refresh the cached dataset files')
 
@@ -38,6 +35,8 @@ if __name__ == "__main__":
     set_seed(seed)
 
     # STEP 1: load data
+    #  The mimic2 dataset is a subset of the mimic3 dataset, so we can load the mimic2 dataset with MIMIC3Dataset. 
+    #  But remember to make sure the original csv file is the mimic2 csv file.
     base_dataset = MIMIC3Dataset(
         root=args.dataset_path,
         tables=["DIAGNOSES_ICD", "PROCEDURES_ICD", "PRESCRIPTIONS"],

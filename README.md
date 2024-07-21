@@ -1,5 +1,5 @@
 # LAMRec
-LAMRec:Label-aware Multi-view Drug Recommendation
+This is the code implementation of the "LAMRec: Label-aware Multi-view Drug Recommendation" accepted by CIKM 2024.
 
 ![1715072947690](./fig/fig1.png)
 
@@ -30,7 +30,7 @@ To set up the environment using conda, follow these steps:
 You can run and test your own model using the following code, and remember to complete your local dataset path:
 
 ```
-python run.py \
+python run_mimic3.py \
   --embedding_dim 512 \
   --heads 8 \
   --num_layers 2 \
