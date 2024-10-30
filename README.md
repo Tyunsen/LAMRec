@@ -67,6 +67,15 @@ python test.py \
   --refresh_cache False
 ```
 
-## Reference
+## Citation
 
-todo
+If you find the code useful, please consider citing the following paper:
+```
+@inproceedings{tang2024lamrec,
+  title={LAMRec: Label-aware Multi-view Drug Recommendation},
+  author={Tang, Yunsen and Liu, Ning and Yuan, Haitao and Yan, Yonghe and Liu, Lei and Tan, Weixing and Cui, Lizhen},
+  booktitle={Proceedings of the 33rd ACM International Conference on Information and Knowledge Management},
+  pages={2230--2239},
+  year={2024}
+}
+```
